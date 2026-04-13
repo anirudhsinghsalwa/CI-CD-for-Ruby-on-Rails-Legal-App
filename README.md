@@ -42,3 +42,62 @@ The system is designed to ensure **reliability, scalability, and zero manual int
 ---
 
 ## 📁 Project Structure
+CI-CD-Rails-Legal-App/
+│
+├── app/ # Rails application code
+├── config/ # Application configuration
+├── db/ # Database files and migrations
+├── spec/ or test/ # Test cases (RSpec or Minitest)
+│
+├── Dockerfile # Docker image configuration
+├── docker-compose.yml # Multi-container setup (optional)
+├── .dockerignore # Ignore unnecessary files
+│
+└── .github/
+└── workflows/
+└── ci-cd.yml # CI/CD pipeline definition
+
+
+---
+
+## 🔄 CI/CD Workflow
+
+The pipeline is triggered automatically based on GitHub events.
+
+### 🔹 Continuous Integration (CI)
+
+- Triggered on every `push` and `pull request`  
+- Installs dependencies  
+- Runs unit tests (RSpec / Minitest)  
+- Ensures code quality before merging  
+
+### 🔹 Continuous Deployment (CD)
+
+- Triggered on merge to `main` / `production` branch  
+- Builds Docker image of the application  
+- Tags and pushes image to Docker Hub (or registry)  
+- Prepares application for deployment  
+
+---
+
+## ⚙️ CI/CD Pipeline Stages
+
+Stage 1 — Checkout
+└─ Pull latest code from repository
+
+Stage 2 — Setup Environment
+└─ Install Ruby and dependencies
+└─ Setup database (if required)
+
+Stage 3 — Run Tests
+└─ Execute RSpec / Minitest
+└─ Ensure all test cases pass
+
+Stage 4 — Build Docker Image
+└─ Create containerized Rails application image
+
+Stage 5 — Push Image
+└─ Push Docker image to Docker Hub / registry
+
+Stage 6 — Deployment (Optional)
+└─ Deploy to server / cloud environment
